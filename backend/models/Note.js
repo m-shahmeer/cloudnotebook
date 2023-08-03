@@ -7,14 +7,13 @@ const NotesSchema = new Schema({
     ref: "user",
   },
 
-  name: {
+  title: {
     type: String,
     required: true,
   },
   description: {
     type: String,
     require: true,
-    unique: true,
   },
   tag: {
     type: String,
