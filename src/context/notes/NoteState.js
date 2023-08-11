@@ -1,5 +1,4 @@
 import NoteContext from "./noteContext";
-import { useContext } from "react";
 import { useState } from "react";
 
 const NoteState = (props) => {
@@ -51,7 +50,19 @@ const NoteState = (props) => {
     setNotes(notes.concat(note));
   };
   // Delete a Note
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    // API Call
+    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
+      }
+    });
+    const json = response.json();
+    console.log(json);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
@@ -72,6 +83,7 @@ const NoteState = (props) => {
       body: JSON.stringify(title, description, tag),
     });
     const json = response.json();
+    console.log(json);
 
     // Logic to edit in Client
     for (let index = 0; index < notes.length; index++) {
