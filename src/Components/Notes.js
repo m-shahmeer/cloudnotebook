@@ -51,12 +51,12 @@ const onChange= (e)=>{
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">Title</label>
                   <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} aria-describedby="emailHelp"
-                    onChange={onChange} />
+                    onChange={onChange} minLength={5} required />
 
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange} />
+                  <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange} minLength={5} required />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="tag" className="form-label">Tag</label>
@@ -74,6 +74,9 @@ const onChange= (e)=>{
       <div className="container">
         <div className="row my-3">
           <h3>Your Notes</h3>
+          <div className="container mx-1 my-3">
+            {notes.length===0 && 'No Notes to Display'}
+          </div>
           {notes.map((note) => {
             return <NoteItem key={note._id} updateNote={updateNote} note={note} />;
           })}
