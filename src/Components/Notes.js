@@ -24,7 +24,7 @@ const Notes = () => {
   const handleClick=(e)=>{
     editNote(note.id, note.etitle, note.edescription, note.etag )
     refClose.current.click();
-    console.log("Updating the note", note)
+   
 }
 const onChange= (e)=>{
 
