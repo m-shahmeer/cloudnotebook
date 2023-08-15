@@ -8,15 +8,20 @@ import {
 import About from './Components/About';
 import Home from './Components/Home';
 import Navbar from './Components/Navbar';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+
 function App() {
   return (
     <>
     <NoteState>
    <Router>
-    <Navbar/>
+    <Navbar />
     <Routes>
-    <Route path="/Home" element={<Home />} />
+    <Route path="/" element={<Home />} />
     <Route path="/About" element={<About />} />
+    <Route path="/Login" element={<Login />} />
+    <Route path="/Signup" element={<Signup />} />
    </Routes>
    </Router>
    </NoteState>

@@ -73,7 +73,7 @@ const NoteState = (props) => {
         "auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
       },
-      body: JSON.stringify({title, description, tag}),
+      body: JSON.stringify({title, description, tag})
     });
     const json = await response.json();
 
