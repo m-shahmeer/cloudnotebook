@@ -17,7 +17,7 @@ const NoteState = (props) => {
           headers: {
             "Content-Type": "application/json",
             "auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
+              localStorage.getItem('token')
           },
         });
         const json = await response.json()
@@ -34,7 +34,7 @@ const NoteState = (props) => {
           headers: {
             "Content-Type": "application/json",
             "auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
+              localStorage.getItem('token')
           },
           body: JSON.stringify({title, description, tag}),
         });
@@ -52,10 +52,11 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
+          localStorage.getItem('token')
       }
     });
     const json = response.json();
+    console.log(json);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
@@ -71,12 +72,12 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjYjFmNTM4NjdkZTk0YWU0YTU3YmY4In0sImlhdCI6MTY5MTA4MjQ5OX0.de56rpRpNjfAEbkA6U2bWGkCo2Hh48X_zZKJRh_qLow",
+          localStorage.getItem('token')
       },
       body: JSON.stringify({title, description, tag})
     });
     const json = await response.json();
-
+    console.log(json)
     let newNotes = JSON.parse(JSON.stringify(notes));
     // Logic to edit in Client
     for (let index = 0; index < notes.length; index++) {

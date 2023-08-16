@@ -67,7 +67,7 @@ router.post(
     let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({success, errors: errors.array() });
     }
 
     const { email, password } = req.body;
@@ -82,7 +82,7 @@ router.post(
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         success= false
-        return res.status(400).json({ error: "Please enter the correct email or password" });
+        return res.status(400).json({success, error: "Please enter the correct email or password" });
       }
 
       const data = {
