@@ -7,41 +7,42 @@ const NoteState = (props) => {
   const notesInitial = []
   const [notes, setNotes] = useState(notesInitial);
 
-   // Get all Notes
-   const getNotes = async () => {
-        // API Call
+  // Get all Notes
+  const getNotes = async () => {
+    // API Call
 
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-          method: "GET",
+    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+      method: "GET",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          localStorage.getItem('token')
+      },
+    });
+    const json = await response.json()
+    setNotes(json)
     
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token":
-              localStorage.getItem('token')
-          },
-        });
-        const json = await response.json()
-        setNotes(json)
   };
 
   // Add a Note
   const addNote = async (title, description, tag) => {
-        // API Call
+    // API Call
 
-        const response = await fetch(`${host}/api/notes/addnote`, {
-          method: "POST",
-    
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token":
-              localStorage.getItem('token')
-          },
-          body: JSON.stringify({title, description, tag}),
-        });
-        const note = await response.json();
-        setNotes(notes.concat(note));
-        
-    
+    const response = await fetch(`${host}/api/notes/addnote`, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          localStorage.getItem('token')
+      },
+      body: JSON.stringify({ title, description, tag }),
+    });
+    const note = await response.json();
+    setNotes(notes.concat(note));
+
+
   };
   // Delete a Note
   const deleteNote = async (id) => {
@@ -74,7 +75,7 @@ const NoteState = (props) => {
         "auth-token":
           localStorage.getItem('token')
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({ title, description, tag })
     });
     const json = await response.json();
     console.log(json)
@@ -88,13 +89,13 @@ const NoteState = (props) => {
         newNotes[index].tag = tag;
         break;
       }
-      
+
     }
     setNotes(newNotes);
   };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote , getNotes }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
       {props.children}
     </NoteContext.Provider>
   );

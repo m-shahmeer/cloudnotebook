@@ -1,43 +1,44 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
-  const [credentials, setCredentials] = useState({name:"", email: "", password:"", cpassword:""})
+  const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" })
   let navigate = useNavigate();
-  
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      const {name, email, password} = credentials;
-      const response = await fetch("http://localhost:5000/api/auth/createuser", {
-        
-          method: "POST",
 
-          headers: {
-              "Content-Type": "application/json"
-              
-          },
-    body: JSON.stringify({name, email, password})
-      });
-      const json = await response.json()
-      console.log(json)
-          //Save the Auth Token and Redirect
-          localStorage.setItem('token', json.authtoken);
-          navigate("/")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, password } = credentials;
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+
+      },
+      body: JSON.stringify({ name, email, password })
+    });
+    const json = await response.json()
+    console.log(json)
+    //Save the Auth Token and Redirect
+    localStorage.setItem('token', json.authtoken);
+    navigate("/")
   }
 
-  const onChange= (e)=>{
+  const onChange = (e) => {
 
-      setCredentials({...credentials, [e.target.name]: e.target.value})
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
   return (
     <>
-      <div className="container my-5"> 
+      <div className="container my-5">
+        <h1>Create an Account</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">Name</label>
-            <input type="text" className="form-control" name="name"  onChange={onChange} id="name" aria-describedby="emailHelp" />
+            <input type="text" className="form-control" name="name" onChange={onChange} id="name" aria-describedby="emailHelp" />
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
@@ -52,7 +53,7 @@ const Signup = () => {
             <label htmlFor="cpassword" name="password" className="form-label">Confirm Password</label>
             <input type="password" className="form-control" onChange={onChange} id="cpassword" minLength={5} required />
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-dark">Submit</button>
         </form>
       </div>
     </>
