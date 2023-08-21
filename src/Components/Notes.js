@@ -9,10 +9,10 @@ const Notes = () => {
   const { notes, getNotes, editNote } = context;
   let navigate = useNavigate();
   useEffect(() => {
-    if(localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       getNotes()
     }
-    else{
+    else {
       navigate("/Login")
     }
     // eslint-disable-next-line
@@ -23,20 +23,20 @@ const Notes = () => {
 
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({id: currentNote._id, etitle: currentNote.title, edescription:currentNote.description, etag: currentNote.tag})
+    setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
   }
 
-  const [note, setNote] = useState({id:"", etitle: "", edescription: "", etag: "default"})
+  const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" })
 
-  const handleClick=(e)=>{
-    editNote(note.id, note.etitle, note.edescription, note.etag )
+  const handleClick = (e) => {
+    editNote(note.id, note.etitle, note.edescription, note.etag)
     refClose.current.click();
-   
-}
-const onChange= (e)=>{
 
-    setNote({...note, [e.target.name]: e.target.value})
-}
+  }
+  const onChange = (e) => {
+
+    setNote({ ...note, [e.target.name]: e.target.value })
+  }
 
   return (
     <>
@@ -82,7 +82,7 @@ const onChange= (e)=>{
         <div className="row my-3">
           <h3>Your Notes</h3>
           <div className="container mx-1 my-3">
-            {notes.length===0 && 'No Notes to Display'}
+            {notes.length === 0 && 'No Notes to Display'}
           </div>
           {notes.map((note) => {
             return <NoteItem key={note._id} updateNote={updateNote} note={note} />;
